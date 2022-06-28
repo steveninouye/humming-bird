@@ -1,0 +1,269 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Address {
+  id        String   @id @default(cuid())
+  street    String?
+  city      String?
+  state     String?
+  zip       String?
+  latitude  Float?
+  longitude Float?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
+  // ****************************END COLUMNS****************************
+
+  // ******RELATIONS******
+  Users    User[]
+  Business Business[]
+}
+
+model Business {
+  id           String   @id @default(cuid())
+  addressId    String?
+  name         String?
+  facebookUrl  String?
+  instagramUrl String?
+  websiteUrl   String?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @default(now())
+  // ****************************END COLUMNS****************************
+
+  // ******RELATIONS******
+  address Address? @relation(fields: [addressId], references: [id])
+
+  PhotographyService PhotographyService[]
+  BusinessRating     BusinessRating[]
+  @@index([addressId])
+}
+
+model User {
+  id        String   @id @default(cuid())
+  addressId String?
+  email     String?
+  firstName String?
+  lastName  String?
+  password  String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
+  // ****************************END COLUMNS****************************
+
+  // ******RELATIONS******
+  address       Address?        @relation(fields: [addressId], references: [id])
+  Event         Event[]
+  EventAttendee EventAttendee[]
+  @@index([addressId])
+}
+
+model Event {
+  id             String    @id @default(cuid())
+  endTime        DateTime?
+  eventOwnerId   String?
+  eventTypeId    Int?
+  startTime      DateTime?
+  venueServiceId Int?
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @default(now())
+  // ****************************END COLUMNS****************************
+
+  // ******RELATIONS******
+  eventOwner    User?           @relation(fields: [eventOwnerId], references: [id])
+  eventType     EventType?      @relation(fields: [eventTypeId], references: [id])
+  venueService  VenueService?   @relation(fields: [venueServiceId], references: [id])
+  EventAttendee EventAttendee[]
+
+  EventPhotographyService EventPhotographyService[]
+  EventVenueService       EventVenueService[]
+  @@index([eventOwnerId])
+  @@index([venueServiceId])
+  @@index([eventTypeId])
+}
+
+model EventType {
+  id                    Int                     @id @default(autoincrement())
+  /// Example: Reception, Ceremoney, Dinner, etc
+  name                  String
+  createdAt             DateTime                @default(now())
+  Event                 Event[]
+  VenueServiceEventType VenueServiceEventType[]
+}
+
+model EventAttendee {
+  id        String   @id @default(cuid())
+  eventId   String?
+  userId    String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
+  // ****************************END COLUMNS****************************
+
+  event Event? @relation(fields: [eventId], references: [id])
+  user  User?  @relation(fields: [userId], references: [id])
+
+  @@index([eventId])
+  @@index([userId])
+}
+
+// Types of events that can be hosted at a venue service
+model VenueServiceEventType {
+  id             String   @id @default(cuid())
+  eventTypeId    Int?
+  venueServiceId Int?
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @default(now())
+  // ****************************END COLUMNS****************************
+
+  // ******RELATIONS******
+  eventType    EventType?    @relation(fields: [eventTypeId], references: [id])
+  venueService VenueService? @relation(fields: [venueServiceId], references: [id])
+
+  @@index([eventTypeId])
+  @@index([venueServiceId])
+}
+
+model VenueService {
+  id                    Int      @id @default(autoincrement())
+  addressId             String?
+  advertisedCostInCents Int?
+  businessId            String?
+  name                  String?
+  createdAt             DateTime @default(now())
+  updatedAt             DateTime @default(now())
+  // ****************************END COLUMNS****************************
+
+  Event                 Event[]
+  EventVenueService     EventVenueService[]
+  VenueServiceEventType VenueServiceEventType[]
+  VenueServiceRating    VenueServiceRating[]
+}
+
+model BusinessRating {
+  id             String   @id @default(cuid())
+  businessId     String?
+  /// Times 1_000_000 (e.g. 4.5 * 10_000 = 4_500_000)
+  rating         Int?
+  ratingSystemId Int?
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @default(now())
+  // ****************************END COLUMNS****************************
+
+  // ******RELATIONS******
+  business     Business?     @relation(fields: [businessId], references: [id])
+  ratingSystem RatingSystem? @relation(fields: [ratingSystemId], references: [id])
+
+  @@index([businessId])
+  @@index([ratingSystemId])
+}
+
+model VenueServiceRating {
+  id             String   @id @default(cuid())
+  /// Times 1_000_000 (e.g. 4.5 * 10_000 = 4_500_000)
+  rating         Int?
+  ratingSystemId Int?
+  venueServiceId Int?
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @default(now())
+  // ****************************END COLUMNS****************************
+
+  // ******RELATIONS******
+  venueService VenueService? @relation(fields: [venueServiceId], references: [id])
+  ratingSystem RatingSystem? @relation(fields: [ratingSystemId], references: [id])
+
+  @@index([venueServiceId])
+  @@index([ratingSystemId])
+}
+
+model PhotographyServiceRating {
+  id                   String   @id @default(cuid())
+  photographyServiceId String?
+  /// Times 1_000_000 (e.g. 4.5 * 10_000 = 4_500_000)
+  rating               Int?
+  ratingSystemId       Int?
+  createdAt            DateTime @default(now())
+  updatedAt            DateTime @default(now())
+  // ****************************END COLUMNS****************************
+
+  // ******RELATIONS******
+  photographyService PhotographyService? @relation(fields: [photographyServiceId], references: [id])
+  ratingSystem       RatingSystem?       @relation(fields: [ratingSystemId], references: [id])
+
+  @@index([photographyServiceId])
+  @@index([ratingSystemId])
+}
+
+enum RatingSystemType {
+  CLIENT
+  CLIENT_GUEST
+  CO_OP_VENDOR
+  GOOGLE
+  KNOT
+  YELP
+}
+
+model RatingSystem {
+  id        Int              @id @default(autoincrement())
+  type      RatingSystemType
+  /// Times 1_000_000 (e.g. 4.5 * 10_000 = 4_500_000)
+  topRating Int
+  createdAt DateTime         @default(now())
+  updatedAt DateTime         @default(now())
+  // ****************************END COLUMNS****************************
+
+  BusinessRating           BusinessRating[]
+  PhotographyServiceRating PhotographyServiceRating[]
+  VenueServiceRating       VenueServiceRating[]
+}
+
+model PhotographyService {
+  id                    String   @id @default(cuid())
+  advertisedCostInCents Int?
+  businessId            String?
+  name                  String?
+  createdAt             DateTime @default(now())
+  updatedAt             DateTime @default(now())
+  // ****************************END COLUMNS****************************
+
+  business                 Business?                  @relation(fields: [businessId], references: [id])
+  EventPhotographyService  EventPhotographyService[]
+  PhotographyServiceRating PhotographyServiceRating[]
+
+  @@index([businessId])
+}
+
+model EventPhotographyService {
+  id                   String   @id @default(cuid())
+  eventId              String?
+  photographyServiceId String?
+  createdAt            DateTime @default(now())
+  updatedAt            DateTime @default(now())
+  // ****************************END COLUMNS****************************
+
+  event              Event?              @relation(fields: [eventId], references: [id])
+  photographyService PhotographyService? @relation(fields: [photographyServiceId], references: [id])
+
+  @@index([eventId])
+  @@index([photographyServiceId])
+}
+
+model EventVenueService {
+  id             String   @id @default(cuid())
+  eventId        String?
+  venueServiceId Int?
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @default(now())
+  // ****************************END COLUMNS****************************
+
+  event        Event?        @relation(fields: [eventId], references: [id])
+  venueService VenueService? @relation(fields: [venueServiceId], references: [id])
+
+  @@index([eventId])
+  @@index([venueServiceId])
+}
