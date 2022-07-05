@@ -1,2 +1,3 @@
-@forward 'styles/colors.scss' as colors-*;
-@forward 'styles/typography.scss' as font-*;
+@forward 'styles/colors.scss' as color-*;
+@forward 'styles/typography.scss';
+@forward 'styles/layout.scss';

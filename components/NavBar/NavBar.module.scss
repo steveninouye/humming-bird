@@ -1,0 +1,65 @@
+@use 'styles' as *;
+
+@mixin nav-bar-base {
+  height: 100px;
+  width: 100%;
+}
+
+// Pushes any sibling content below the navbar.
+.navBarPadding {
+  @include nav-bar-base;
+}
+
+@mixin nav-bar-main {
+  @include nav-bar-base;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+// Bottom border for the navbar.
+.navBarContainer {
+  @include nav-bar-main;
+  background-color: transparent;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.12);
+  display: flex;
+  justify-content: center;
+  z-index: $nav-bar-z-index + 1;
+}
+
+.navBar {
+  @include nav-bar-main;
+  align-items: center;
+  background-color: $color-white;
+  background: $color-white;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 $mat-grid * 7;
+  position: relative;
+  z-index: $nav-bar-z-index;
+  max-width: $max-width;
+}
+
+.navLinks {
+  align-items: center;
+  display: flex;
+  gap: 24px;
+}
+
+.buttons {
+  display: flex;
+  gap: 16px;
+}
+
+.logo {
+  margin-right: 12px;
+}
+
+.links {
+  color: $color-black;
+  font-family: $Montserrat;
+  font-size: 16px;
+  font-style: normal;
+  height: 20px;
+  line-height: 20px;
+}
