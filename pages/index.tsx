@@ -34,7 +34,7 @@ const HomePage: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <NavBar />
-      <body className={styles.main}>
+      <div className={styles.main}>
         <h1 className={styles.heading1}>
           <span className={styles.headingSecondary}>Find</span>
           <span className={styles.headingPrimary}>Wedding Vendors</span>
@@ -56,7 +56,7 @@ const HomePage: NextPage = () => {
           width="700px"
           height="433px"
         />
-      </body>
+      </div>
     </>
   );
 };
