@@ -1,0 +1,28 @@
+@use 'styles' as *;
+
+.container {
+  height: min-content;
+  width: 100%;
+}
+
+.inputContainer {
+  height: min-content;
+  transition: height 2s linear;
+  padding: 0.1rem;
+}
+
+.input {
+  @include ease-out;
+  display: block;
+  height: 30px;
+  width: 100%;
+
+  &.hidden {
+    z-index: -1;
+    opacity: 0;
+    height: 0;
+    border: 0;
+    padding: 0;
+    margin: 0;
+  }
+}

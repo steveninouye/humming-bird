@@ -1,3 +1,5 @@
+import styles from './index.module.scss';
+import VendorFilters from 'components/Form/VendorFilters/VendorFilters';
 import NavBar from 'components/NavBar/NavBar';
 import type { NextPage } from 'next';
 import Head from 'next/head';
@@ -19,8 +21,8 @@ const VendorsPage: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <NavBar />
-      <div>
-        <h1>This is the search page</h1>
+      <div className={styles.container}>
+        <VendorFilters />
       </div>
     </>
   );

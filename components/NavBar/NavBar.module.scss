@@ -6,6 +6,7 @@
 }
 
 // Pushes any sibling content below the navbar.
+// NOTE: possibly use ::before pseudo-element to replace this.
 .navBarPadding {
   @include nav-bar-base;
 }

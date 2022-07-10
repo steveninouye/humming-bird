@@ -9,8 +9,6 @@ import homeRings from 'public/home-rings.jpeg';
 import { useId, useRef } from 'react';
 import styles from './index.module.scss';
 
-const searchPath = { pathname: '/search' };
-
 const HomePage: NextPage = () => {
   const router = useRouter();
   const id = useId();
