@@ -14,7 +14,7 @@ const arrowClassName = (isOpen: boolean): string =>
 
 export interface IFilterLabelProps {
   label: string;
-  htmlFor: string;
+  htmlFor?: string;
   isOpen: boolean;
   onClick: () => void;
 }

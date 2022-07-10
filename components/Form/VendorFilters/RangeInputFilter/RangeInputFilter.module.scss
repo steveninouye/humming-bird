@@ -6,7 +6,7 @@
   position: relative;
 }
 
-.inputContainer {
+.bottomSection {
   display: block;
   height: min-content;
   transition: height 2s linear;
@@ -17,13 +17,32 @@
   grid-gap: 0 0.1rem;
 }
 
-.input {
-  @include ease-out;
-  display: block;
-  height: 30px;
+.inputContainer {
+  position: relative;
+  padding-top: 0.1rem;
+}
+
+.hiddenLabel {
+  position: absolute;
+  visibility: hidden;
   display: inline-block;
   width: 100%;
+  z-index: -1;
+}
 
+.input {
+  width: 100%;
+  height: 1.875rem;
+}
+
+.slider {
+  grid-column: 1 / -1;
+}
+
+.inputContainer,
+.input,
+.slider {
+  @include ease-out;
   &.hidden {
     opacity: 0;
     height: 0;
@@ -31,8 +50,4 @@
     padding: 0;
     margin: 0;
   }
-}
-
-.slider {
-  grid-column: 1 / -1;
 }
