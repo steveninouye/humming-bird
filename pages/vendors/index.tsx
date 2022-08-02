@@ -1,6 +1,6 @@
 import styles from './index.module.scss';
-import VendorFilters from 'components/Form/VendorFilters/VendorFilters';
-import NavBar from 'components/NavBar/NavBar';
+import VendorFilters from 'src/components/Form/VendorFilters/VendorFilters';
+import NavBar from 'src/components/NavBar/NavBar';
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';

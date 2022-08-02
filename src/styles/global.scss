@@ -1,0 +1,7 @@
+@use 'src/styles' as *;
+@use 'styles/reset.scss';
+
+html,
+body {
+  background-color: $color-white;
+}

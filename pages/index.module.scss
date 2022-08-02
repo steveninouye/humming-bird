@@ -1,4 +1,4 @@
-@use 'styles' as *;
+@use 'src/styles' as *;
 
 .main {
   display: grid;
@@ -58,6 +58,28 @@
   align-items: flex-end;
   gap: 1.5rem;
   grid-row: 6 / 7;
+}
+
+.input {
+  border-radius: 5px;
+  font-family: $Montserrat;
+  height: 2.875rem;
+  width: 21rem;
+  font-size: 1rem;
+  padding: 0 3rem;
+}
+
+.icon {
+  margin: 0 0.5rem;
+  color: #444141;
+}
+
+.label {
+  color: $color-black;
+  font-family: $Montserrat;
+  font-size: 1rem;
+  font-weight: 400;
+  margin-bottom: 0.2rem;
 }
 
 @mixin right-column {

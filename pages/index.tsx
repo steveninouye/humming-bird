@@ -1,12 +1,13 @@
-import Button from 'components/Button/Button';
-import Search from 'components/Form/Input/Search/Search';
-import StyledImg from 'components/Image/Image';
-import NavBar from 'components/NavBar/NavBar';
+import Button from 'src/components/Button/Button';
+import StyledImg from 'src/components/Image/Image';
+import NavBar from 'src/components/NavBar/NavBar';
+import { InputAdornment, InputLabel, OutlinedInput } from '@mui/material';
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import homeRings from 'public/home-rings.jpeg';
 import { useId, useRef } from 'react';
+import SearchIcon from '@mui/icons-material/Search';
 import styles from './index.module.scss';
 
 const HomePage: NextPage = () => {
@@ -43,7 +44,20 @@ const HomePage: NextPage = () => {
           We match vendors on over 100 attributes to find one that fits you
         </h2>
         <form className={styles.form} onSubmit={onSubmit}>
-          <Search id={id} ref={locationInputRef} placeholder="96185" />
+          <InputLabel className={styles.label} htmlFor={id}>
+            Search a Location
+          </InputLabel>
+          <OutlinedInput
+            className={styles.input}
+            id={id}
+            inputRef={locationInputRef}
+            placeholder="96185"
+            startAdornment={
+              <InputAdornment position="start">
+                <SearchIcon />
+              </InputAdornment>
+            }
+          />
           <Button text="Search" />
         </form>
         <StyledImg

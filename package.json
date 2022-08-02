@@ -7,13 +7,17 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "build:schema:models": "prisma generate"
+    "build:schema:models": "prisma generate",
+    "test": "jest --watch",
+    "test:ci": "jest --ci"
   },
   "dependencies": {
-    "@emotion/react": "^11.9.3",
-    "@emotion/styled": "^11.9.3",
+    "@emotion/react": "^11.10.0",
+    "@emotion/server": "^11.10.0",
+    "@emotion/styled": "^11.10.0",
+    "@mantine/next": "^5.0.2",
     "@mui/icons-material": "^5.8.4",
-    "@mui/material": "^5.8.6",
+    "@mui/material": "^5.9.3",
     "@prisma/client": "^3.15.2",
     "next": "12.1.6",
     "react": "18.2.0",
@@ -21,18 +25,23 @@
     "superjson": "^1.9.1"
   },
   "devDependencies": {
+    "@testing-library/jest-dom": "^5.16.4",
+    "@testing-library/react": "^13.3.0",
+    "@testing-library/user-event": "^14.2.1",
     "@types/node": "18.0.0",
     "@types/react": "18.0.14",
     "@types/react-dom": "18.0.5",
     "babel-plugin-superjson-next": "^0.4.3",
     "eslint": "8.18.0",
-    "eslint-config-next": "12.1.6",
+    "eslint-config-next": "^0.2.4",
+    "jest": "^28.1.2",
+    "jest-environment-jsdom": "^28.1.2",
     "prisma": "^3.15.2",
     "sass": "^1.53.0",
     "typescript": "4.7.4"
   },
   "prisma": {
-    "seed": "ts-node -O {\"module\":\"CommonJS\"} db/seed.ts",
-    "schema": "db/schema.prisma"
+    "seed": "ts-node -O {\"module\":\"CommonJS\"} src/db/seed.ts",
+    "schema": "src/db/schema.prisma"
   }
 }
