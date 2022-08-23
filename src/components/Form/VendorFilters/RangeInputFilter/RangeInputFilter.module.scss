@@ -3,45 +3,99 @@
 .container {
   height: min-content;
   width: 100%;
-  position: relative;
+  padding: 0;
+  margin: 0;
+  border: none;
+}
+
+.topSection {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.13rem 0.5rem 0.1rem 0.5rem;
+}
+
+.legend {
+  padding: 0;
+}
+
+.title {
+  color: $color-black;
+  display: flex;
+  font-family: $Montserrat;
+  font-size: 1rem;
+  justify-content: space-between;
+  line-height: 20px;
+  padding: 0.13rem 0.5rem;
+}
+
+.arrowIcon {
+  @include ease-out;
+  color: green;
+  padding: 0 0.1rem;
+  transform: rotateX(180deg);
+  transition: transform 0.15s ease-in-out;
+
+  &.isOpen {
+    transform: rotateX(0deg);
+  }
 }
 
 .bottomSection {
   display: block;
   height: min-content;
   transition: height 2s linear;
-  padding: 0.1rem;
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-template-rows: repeat(2, 1fr);
+  grid-template-columns: 1fr min-content 1fr;
+  grid-template-rows: 1fr;
   grid-gap: 0 0.1rem;
 }
 
-.inputContainer {
+.numberInputContainer {
+  height: min-content;
   position: relative;
-  padding-top: 0.1rem;
 }
 
-.hiddenLabel {
+$input-margin: 0.45rem;
+
+.numberInputLabel {
   position: absolute;
-  visibility: hidden;
-  display: inline-block;
-  width: 100%;
-  z-index: -1;
+  top: 0.1rem;
+  z-index: 13;
+  padding: 0 0.05rem;
+  font-size: $input-margin * 1.3;
+  background-color: $color-white;
+  margin-left: 0.5rem;
 }
 
-.input {
+.numberInputSymbol {
+  position: absolute;
+  left: 0.3rem;
+  top: 0.88rem;
+  font-size: 0.7rem;
+  color: $color-grey-700;
+}
+
+.numberInput {
+  margin-top: $input-margin;
   width: 100%;
   height: 1.875rem;
+  padding: 0 0.8rem;
+}
+
+.dash {
+  font-size: 1.2rem;
+  align-self: center;
 }
 
 .slider {
   grid-column: 1 / -1;
 }
 
-.inputContainer,
-.input,
-.slider {
+.numberInputContainer,
+.numberInputLabel,
+.numberInput,
+.slider,
+.dash {
   @include ease-out;
   &.hidden {
     opacity: 0;

@@ -44,20 +44,22 @@ const HomePage: NextPage = () => {
           We match vendors on over 100 attributes to find one that fits you
         </h2>
         <form className={styles.form} onSubmit={onSubmit}>
-          <InputLabel className={styles.label} htmlFor={id}>
-            Search a Location
-          </InputLabel>
-          <OutlinedInput
-            className={styles.input}
-            id={id}
-            inputRef={locationInputRef}
-            placeholder="96185"
-            startAdornment={
-              <InputAdornment position="start">
-                <SearchIcon />
-              </InputAdornment>
-            }
-          />
+          <span>
+            <InputLabel className={styles.label} htmlFor={id}>
+              Search a Location
+            </InputLabel>
+            <OutlinedInput
+              className={styles.input}
+              id={id}
+              inputRef={locationInputRef}
+              placeholder="96185"
+              startAdornment={
+                <InputAdornment position="start">
+                  <SearchIcon />
+                </InputAdornment>
+              }
+            />
+          </span>
           <Button text="Search" />
         </form>
         <StyledImg

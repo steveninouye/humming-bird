@@ -1,3 +1,4 @@
+import { useId } from 'react';
 import RangeInputFilter from 'src/components/Form/VendorFilters/RangeInputFilter/RangeInputFilter';
 import TextInputFilter from 'src/components/Form/VendorFilters/TextInputFilter/TextInputFilter';
 import styles from './VendorFilters.module.scss';
@@ -8,7 +9,7 @@ export interface IVendorFiltersProps {
 
 const VendorFilters: React.FC<IVendorFiltersProps> = () => {
   return (
-    <div className={styles.container}>
+    <form className={styles.container}>
       <TextInputFilter filterTitle="Location" />
       <RangeInputFilter filterTitle="Budget" max={100} min={0} />
       <TextInputFilter filterTitle="Date" />
@@ -17,7 +18,7 @@ const VendorFilters: React.FC<IVendorFiltersProps> = () => {
       <TextInputFilter filterTitle="Culture/Theme" />
       <TextInputFilter filterTitle="Personality" />
       <TextInputFilter filterTitle="Close" />
-    </div>
+    </form>
   );
 };
 
